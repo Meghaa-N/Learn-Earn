@@ -39,7 +39,11 @@ if(isset($_POST['admin_id'])){
                     <td><?php echo $row['Email'] ?></td>
                     <td><?php echo $row['Phone'] ?></td>
                     <td>
-                    <a class='btn btn-success' href='view_student.php?student_id=<?php echo $row['Student_Id'] ?>'>View Student</a>
+                    <form action='view_student.php' method='post'>
+                    <input type='hidden' name='student_id' value='<?php echo $row['Student_Id'] ?>' />
+                    <input type='submit' name='submit' class='btn btn-success' value='View Student' />
+                    </form>
+                    </td>
                     <!--button class='btn btn-danger' >Remove</button -->
                   </tr>
         <?php
@@ -54,5 +58,7 @@ if(isset($_POST['admin_id'])){
     }else{
         echo $con->error;
     }
+}else{
+  echo "BOW";
 }
 ?>

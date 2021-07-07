@@ -53,7 +53,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']=='admin' && isset($_SESSION['ad
       <div class="container">
 
         <ol>
-          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.php">Home</a></li>
           <li>Admin</li>
         </ol>
         <h2>Admin Login</h2>

@@ -2,6 +2,11 @@
 session_start();
 include "api/dbconnect.php";
 //echo "<script>window.alert('Hello')</script>";
+if((!isset($_POST['student_id']) || !isset($_SESSION['student_id']))&&$_SESSION['user']=='admin')
+  header('location: admin.php');
+else{
+  $_SESSION['student_id']=$_POST['student_id'];
+}
 ?>
 <!DOCTYPE html>
 <style>
@@ -54,6 +59,7 @@ include "api/dbconnect.php";
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <link href='cards.css' rel='stylesheet'>
 
 
 
@@ -69,7 +75,7 @@ include "api/dbconnect.php";
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li>Inner Page</li>
         </ol>
         <h2>Inner Page</h2>
@@ -86,10 +92,11 @@ include "api/dbconnect.php";
         </p>
       </div>
 
-      <div class='container'>
-      <h2>Students Assigned</h2>
 
-      <div id='student_list'>
+      <div class='container'>
+      <h2>Student <?php echo $_POST['student_id']?></h2>
+
+      <div id='tasks_assigned'>
       </div>
       </div>
       </div>
@@ -169,18 +176,49 @@ include "api/dbconnect.php";
       </div>
     </div> -->
   </footer><!-- End Footer -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="taskViewModal" tabindex="-1" aria-labelledby="taskViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="taskViewModalLabel">View Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <div id='task_details'></div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   <script>
-    function student_list(){
-      $.post('api/student_list.php', {
-        admin_id: '<?php echo $_SESSION['admin_id'];?>'
+
+    function open_task(taskid){
+      $.post('api/task_details.php', {
+        Task_id: taskid
       }, function(data){
-        $('#student_list').html(data);
+        $('#task_details').html(data);
       })
     }
-
+    function tasks_assigned(){
+      $.post('api/tasks_assigned.php', {
+        student_id: '<?php echo $_SESSION['student_id'];?>'
+      }, function(data){
+        $('#tasks_assigned').html(data);
+      })
+    }
     $(document).ready(function(){
-      student_list();
+      tasks_assigned();
     })
+    
   </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

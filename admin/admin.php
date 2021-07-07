@@ -2,6 +2,8 @@
 session_start();
 include "api/dbconnect.php";
 //echo "<script>window.alert('Hello')</script>";
+if(!isset($_SESSION['admin_id']))
+  header('location:index.php')
 ?>
 <!DOCTYPE html>
 <style>
@@ -69,7 +71,7 @@ include "api/dbconnect.php";
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li>Inner Page</li>
         </ol>
         <h2>Inner Page</h2>
@@ -177,7 +179,6 @@ include "api/dbconnect.php";
         $('#student_list').html(data);
       })
     }
-
     $(document).ready(function(){
       student_list();
     })
