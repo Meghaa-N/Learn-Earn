@@ -1,28 +1,26 @@
-<?php 
+<?php
 session_start();
 include "api/dbconnect.php";
 //echo "<script>window.alert('Hello')</script>";
-if(!isset($_SESSION['admin_id']))
+if (!isset($_SESSION['admin_id']))
   header('location:index.php')
 ?>
 <!DOCTYPE html>
 <style>
-
-  .topic_tabs
-  {
+  .topic_tabs {
     border: 2px solid #009CEA;
     font-family: "Raleway", sans-serif;
     padding-top: 6px;
     /*margin-bottom: 3px;*/
   }
-  .heading
-  {
+
+  .heading {
     font-weight: 900;
     padding-right: 20%;
 
   }
-  .text
-  {
+
+  .text {
     padding-left: 20%;
   }
 </style>
@@ -30,7 +28,7 @@ if(!isset($_SESSION['admin_id']))
 <html lang="en">
 
 <head>
-  
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -63,7 +61,7 @@ if(!isset($_SESSION['admin_id']))
 
 <body>
 
-  <?php include 'navbar.php';?>
+  <?php include 'navbar.php'; ?>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -82,18 +80,18 @@ if(!isset($_SESSION['admin_id']))
     <section class="inner-page">
       <div class="container">
 
-      <div class='jumbotron'>
-        <p>
-          Example inner page template
-        </p>
-      </div>
+        <div class='jumbotron'>
+          <p>
+            Example inner page template
+          </p>
+        </div>
 
-      <div class='container'>
-      <h2>Students Assigned</h2>
+        <div class='container'>
+          <h2>Students Assigned</h2>
 
-      <div id='student_list'>
-      </div>
-      </div>
+          <div id='student_list'>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -163,23 +161,23 @@ if(!isset($_SESSION['admin_id']))
         &copy; Copyright <strong><span>Scaffold</span></strong>. All Rights Reserved
       </div>
       <div class="credits">-->
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/ -->
+    <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div> -->
   </footer><!-- End Footer -->
   <script>
-    function student_list(){
+    function student_list() {
       $.post('api/student_list.php', {
-        admin_id: '<?php echo $_SESSION['admin_id'];?>'
-      }, function(data){
+        admin_id: '<?php echo $_SESSION['admin_id']; ?>'
+      }, function(data) {
         $('#student_list').html(data);
       })
     }
-    $(document).ready(function(){
+    $(document).ready(function() {
       student_list();
     })
   </script>

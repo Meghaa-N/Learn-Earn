@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(isset($_SESSION['user']) && $_SESSION['user']=='admin' && isset($_SESSION['admin_id'])){
-    header('Location: admin.php');
+if (isset($_SESSION['user']) && $_SESSION['user'] == 'admin' && isset($_SESSION['admin_id'])) {
+  header('Location: admin.php');
 }
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']=='admin' && isset($_SESSION['ad
 
 <body>
 
-<?php include 'navbar.php';?>
+  <?php include 'navbar.php'; ?>
 
   <main id="main">
 
@@ -63,47 +63,46 @@ if(isset($_SESSION['user']) && $_SESSION['user']=='admin' && isset($_SESSION['ad
 
     <section class="inner-page">
       <div class="container">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <p>As of now for production time being<br>Admin_id: 1<br>password: 123456</p>
-                    <form action="index.php" method="post" id='adminlogin'>
-                        <div class="form-group">
-                            <label for="adminid">Admin Id:</label>
-                            <input type="text" name="admin_id" class="form-control" placeholder="Enter admin_id" id="admin_id">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Password:</label>
-                            <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
-                        </div>
+        <div class="row justify-content-center">
+          <div class="col">
+            <p>As of now for production time being<br>Admin_id: 1<br>password: 123456</p>
+            <form action="index.php" method="post" id='adminlogin'>
+              <div class="form-group">
+                <label for="adminid">Admin Id:</label>
+                <input type="text" name="admin_id" class="form-control" placeholder="Enter admin_id" id="admin_id">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
+              </div>
 
-                        <input type="submit" class="btn btn-primary" value="Sign In">
-                        <p id='aresult'></p>
-                    </form>
-                </div>
+              <input type="submit" class="btn btn-primary" value="Sign In">
+              <p id='aresult'></p>
+            </form>
+          </div>
 
-            </div>
+        </div>
       </div>
     </section>
 
   </main><!-- End #main -->
 
-    <script>
-     $(document).ready(function(){
-        $('#adminlogin').submit(function(event){
-            event.preventDefault();
+  <script>
+    $(document).ready(function() {
+      $('#adminlogin').submit(function(event) {
+        event.preventDefault();
 
-            var formValues= $(this).serialize();
-            console.log(formValues);
+        var formValues = $(this).serialize();
+        console.log(formValues);
 
-            $.post("api/login_check.php", formValues, function(data){
-                // Display the returned data in browser
-                $('#aresult').html(data);
-                //alert(data);
-            });
+        $.post("api/login_check.php", formValues, function(data) {
+          // Display the returned data in browser
+          $('#aresult').html(data);
+          //alert(data);
         });
-     });
-
-    </script>
+      });
+    });
+  </script>
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">

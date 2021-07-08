@@ -1,31 +1,30 @@
-<?php 
+<?php
 session_start();
 include "api/dbconnect.php";
 //echo "<script>window.alert('Hello')</script>";
-if((!isset($_POST['student_id']) || !isset($_SESSION['student_id']))&&$_SESSION['user']=='admin')
+if ((!isset($_POST['student_id']) && !isset($_SESSION['student_id'])))
   header('location: admin.php');
-else{
-  $_SESSION['student_id']=$_POST['student_id'];
+else {
+  if (!isset($_SESSION['student_id']))
+    $_SESSION['student_id'] = $_POST['student_id'];
 }
 ?>
 <!DOCTYPE html>
 <style>
-
-  .topic_tabs
-  {
+  .topic_tabs {
     border: 2px solid #009CEA;
     font-family: "Raleway", sans-serif;
     padding-top: 6px;
     /*margin-bottom: 3px;*/
   }
-  .heading
-  {
+
+  .heading {
     font-weight: 900;
     padding-right: 20%;
 
   }
-  .text
-  {
+
+  .text {
     padding-left: 20%;
   }
 </style>
@@ -33,7 +32,7 @@ else{
 <html lang="en">
 
 <head>
-  
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -67,7 +66,7 @@ else{
 
 <body>
 
-  <?php include 'navbar.php';?>
+  <?php include 'navbar.php'; ?>
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -86,19 +85,19 @@ else{
     <section class="inner-page">
       <div class="container">
 
-      <div class='jumbotron'>
-        <p>
-          Example inner page template
-        </p>
-      </div>
+        <div class='jumbotron'>
+          <p>
+            Example inner page template
+          </p>
+        </div>
 
 
-      <div class='container'>
-      <h2>Student <?php echo $_POST['student_id']?></h2>
+        <div class='container'>
+          <h2>Student <?php echo $_SESSION['student_id'] ?></h2>
 
-      <div id='tasks_assigned'>
-      </div>
-      </div>
+          <div id='tasks_assigned'>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -168,57 +167,149 @@ else{
         &copy; Copyright <strong><span>Scaffold</span></strong>. All Rights Reserved
       </div>
       <div class="credits">-->
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/ -->
+    <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div> -->
   </footer><!-- End Footer -->
 
+  <!-- Modal -->
+  <div class="modal fade" id="newTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newTaskModalLabel">Create a New Task for Student - <?php echo $_SESSION['student_id'] ?></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id='newTaskForm'>
+          <div class="modal-body">
+            <section id="portfolio-details" class="portfolio-details">
+              <div class="container">
 
-<!-- Modal -->
-<div class="modal fade" id="taskViewModal" tabindex="-1" aria-labelledby="taskViewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="taskViewModalLabel">View Task</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+                <div class="row gy-4">
 
-      <div id='task_details'></div>
+                  <div class="col-lg-8 " data-aos="zoom-in">
+                    <div>
+                      <div class='form-group mt-3'>
+                        <label>Title of Task</label>
+                        <input class='form-control' type='text' name='Task_title' placeholder='Enter the title' required>
+                      </div>
+                      <div class='form-group mt-3'>
+                        <label>Description</label>
+                        <textarea class='form-control' name='Description' placeholder='Enter the description'></textarea>
+                      </div>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+                      <div class="question_div mt-3">
+                        <p>Reference material upload (optional)</p>
+                        <input type='file' class='form-control' id='new_task_pdf' name='Task_pdf_file' onchange="uploadFile()" />
+                        <input type='hidden' id='new_task_pdf_name' name='Task_pdf' />
+                        <p class='bg-success' id='upload_response'></p>
+                      </div>
+                      <div class="portfolio-description">
+                        <h2>Comments</h2>
+                        <textarea class='form-control' name='Comment' placeholder='Write your comment.'></textarea>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4" data-aos="fade-left">
+                    <div class="portfolio-info">
+                      <h3>DETAILS</h3>
+                      <ul>
+                        <li><strong>Due</strong>: <input type='datetime-local' class='form-control' name='Due_Timestamp' /></li>
+                        <li><strong>Marks Possible</strong><input type='number' class='form-control' name='Marks_possible' /></li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" name='submit' class="btn btn-primary" value='Save changes' />
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
-  <script>
 
-    function open_task(taskid){
+  <!-- Modal -->
+  <div class="modal fade" id="taskViewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="taskViewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskViewModalLabel">View Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div id='task_details'></div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function open_task(taskid) {
       $.post('api/task_details.php', {
         Task_id: taskid
-      }, function(data){
+      }, function(data) {
         $('#task_details').html(data);
       })
     }
-    function tasks_assigned(){
+
+    function tasks_assigned() {
       $.post('api/tasks_assigned.php', {
-        student_id: '<?php echo $_SESSION['student_id'];?>'
-      }, function(data){
+        student_id: '<?php echo $_SESSION['student_id']; ?>'
+      }, function(data) {
         $('#tasks_assigned').html(data);
       })
     }
-    $(document).ready(function(){
+
+    function uploadFile() {
+      var fd = new FormData();
+      var files = $('#new_task_pdf')[0].files[0];
+
+      fd.append('file', files);
+
+      $.ajax({
+        url: 'api/upload_file.php',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(response) {
+          $('#new_task_pdf_name').val(response);
+          $('#upload_response').html('File uploaded as : ' + response);
+        },
+      });
+    }
+
+    $(document).ready(function() {
       tasks_assigned();
+
+      $('#newTaskForm').submit(function(event) {
+        event.preventDefault();
+        var formValues = $(this).serialize();
+        $.post("api/add_new_task.php", formValues, function(data) {
+          alert(data);
+          tasks_assigned();
+        });
+
+      })
     })
-    
   </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
