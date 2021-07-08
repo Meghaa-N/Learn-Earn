@@ -5,7 +5,7 @@ include "api/dbconnect.php";
 if ((!isset($_POST['student_id']) && !isset($_SESSION['student_id'])))
   header('location: admin.php');
 else {
-  if (!isset($_SESSION['student_id']))
+  if (isset($_POST['student_id']) || !isset($_SESSION['student_id']))
     $_SESSION['student_id'] = $_POST['student_id'];
 }
 ?>
@@ -202,12 +202,13 @@ else {
                         <textarea class='form-control' name='Description' placeholder='Enter the description'></textarea>
                       </div>
 
-
+                      <input type='hidden' name='mentor_id' value="<?php echo $_SESSION['admin_id'] ?>">
+                      <input type='hidden' name='Student_id' value="<?php echo $_SESSION['student_id'] ?>">
                       <div class="question_div mt-3">
                         <p>Reference material upload (optional)</p>
                         <input type='file' class='form-control' id='new_task_pdf' name='Task_pdf_file' onchange="uploadFile()" />
                         <input type='hidden' id='new_task_pdf_name' name='Task_pdf' />
-                        <p class='bg-success' id='upload_response'></p>
+                        <p class='bg-success text-white' id='upload_response'></p>
                       </div>
                       <div class="portfolio-description">
                         <h2>Comments</h2>
@@ -306,6 +307,9 @@ else {
         $.post("api/add_new_task.php", formValues, function(data) {
           alert(data);
           tasks_assigned();
+          if (data === 'Task Added') {
+            $('#newTaskModal').modal('toggle');
+          }
         });
 
       })

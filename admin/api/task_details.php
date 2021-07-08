@@ -77,6 +77,10 @@ if (isset($_POST['Task_id'])) {
 
         </div>
       </section><!-- End Portfolio Details Section -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <input type="submit" name='submit' class="btn btn-primary" value='Save changes' />
+      </div>
 
     </form>
 

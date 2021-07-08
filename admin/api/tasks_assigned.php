@@ -35,7 +35,6 @@ if (isset($_POST['student_id'])) {
                             <h4 class="card-title"><?php echo $val['Task_Title'] ?></h4>
                             <!-- img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="Photo of sunset" -->
                             <h5 class="item-card-title mt-3 mb-3">Due on: <?php echo $val['Due_Timestamp'] ?></h5>
-                            <p class="card-text">This is a company that builds websites, web apps and e-commerce solutions.</p>
                             <button onclick='open_task(<?php echo $val["Task_id"] ?>)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
                                 View Assignment
                             </button>
