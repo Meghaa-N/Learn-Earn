@@ -35,7 +35,7 @@ if (isset($_POST['student_id'])) {
                             <h4 class="card-title"><?php echo $val['Task_Title'] ?></h4>
                             <!-- img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="Photo of sunset" -->
                             <h5 class="item-card-title mt-3 mb-3">Due on: <?php echo $val['Due_Timestamp'] ?></h5>
-                            <button onclick='open_task(<?php echo $val["Task_id"] ?>)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
+                            <button onclick='open_task(<?php echo $val["Task_id"] ?>, 1)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
                                 View Assignment
                             </button>
                         </div>
@@ -70,7 +70,7 @@ if (isset($_POST['student_id'])) {
                             <!-- img src="https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg" alt="Photo of sunset" -->
                             <h5 class="item-card-title mt-3 mb-3">Due on: <?php echo $val['Due_Timestamp'] ?></h5>
                             <p class="card-text">Submitted on: <?php echo $val['Submission_date_timestamp'] ?></p>
-                            <button onclick='open_task(<?php echo $val["Task_id"] ?>)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
+                            <button onclick='open_task(<?php echo $val["Task_id"] ?>, 2)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
                                 View Assignment
                             </button>
                         </div>
@@ -107,7 +107,7 @@ if (isset($_POST['student_id'])) {
                                 <p>Submitted on: <?php echo $val['Submission_date_timestamp'] ?></p>
                                 <p>Marks: <?php echo $val['Marks'] . '/' . $val['Marks_possible']; ?></p>
                             </div>
-                            <button onclick='open_task(<?php echo $val["Task_id"] ?>)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
+                            <button onclick='open_task(<?php echo $val["Task_id"] ?>, 3)' class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#taskViewModal">
                                 View Assignment
                             </button>
                         </div>

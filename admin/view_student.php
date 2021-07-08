@@ -262,9 +262,10 @@ else {
     </div>
   </div>
   <script>
-    function open_task(taskid) {
+    function open_task(taskid, status) {
       $.post('api/task_details.php', {
-        Task_id: taskid
+        Task_id: taskid,
+        status: status
       }, function(data) {
         $('#task_details').html(data);
       })

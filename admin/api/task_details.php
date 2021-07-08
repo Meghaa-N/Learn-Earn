@@ -66,8 +66,15 @@ if (isset($_POST['Task_id'])) {
 
                   <li><strong>Marks Obtained</strong><input type='number' id='marks_obtained' class='form-control' name='Marks' value='<?php echo $val['Marks'] ?>' /></li>
                   <li><strong>Marks Possible</strong><input type='number' class='form-control' name='Marks_possible' value='<?php echo $val['Marks_possible'] ?>' /></li>
+                  <input type='hidden' name='status' value='<?php echo $_POST["status"] ?>' />
 
-                  <button type='button' class='btn btn-danger' onclick='remove_grading(<?php echo $val["Task_id"]; ?>)'>Remove Grading</button>
+                  <?php
+                  if ($_POST['status'] == 3) {
+                  ?>
+                    <button type='button' class='btn btn-danger' onclick='remove_grading(<?php echo $val["Task_id"]; ?>)'>Remove Grading</button>
+                  <?php
+                  }
+                  ?>
                 </ul>
               </div>
 
@@ -103,7 +110,7 @@ if (isset($_POST['Task_id'])) {
           task_id: task_id
         }, function(data) {
           alert(data);
-          open_task(task_id);
+          open_task(task_id, 2);
           tasks_assigned();
         })
 
