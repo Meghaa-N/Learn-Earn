@@ -33,7 +33,7 @@ if (isset($_POST['Task_id'])) {
                   <div class="question_div">
 
                     <p>Reference material uploaded</p>
-                    <a id="q_pdf" href="../<?php echo $val['Task_PDF'] ?>" target="_blank"><?php echo $val['Task_PDF'] ?></a>
+                    <a id="q_pdf" href="../file_questions/<?php echo $val['Task_PDF'] ?>" target="_blank"><?php echo $val['Task_PDF'] ?></a>
                   </div>
                 <?php } ?>
 
@@ -54,6 +54,9 @@ if (isset($_POST['Task_id'])) {
             </div>
 
             <div class="col-lg-4" data-aos="fade-left">
+              <button type="button" class="btn btn-danger" onclick='remove_task(<?php echo $val["Task_id"]; ?>)'>
+                Remove the Task
+              </button>
               <div class="portfolio-info">
                 <h3>DETAILS</h3>
                 <ul>
@@ -114,6 +117,18 @@ if (isset($_POST['Task_id'])) {
           tasks_assigned();
         })
 
+      }
+
+      function remove_task(task_id) {
+        $.post('api/delete_task.php', {
+          task_id: task_id
+        }, function(data) {
+          alert(data);
+          if (data === 'Task Deleted') {
+            $('#taskViewModal').modal('toggle');
+          }
+          tasks_assigned();
+        })
       }
     </script>
 <?php

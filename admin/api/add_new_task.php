@@ -18,7 +18,7 @@ if (isset($_POST['Task_title'])) {
         $task['Student_id'],
         $task['Task_title'],
         $task['Description'],
-        $task['Task_PDF'],
+        $task['Task_pdf'],
         $task['Due_Timestamp'],
         $task['Marks_possible'],
         $task['Comment']
