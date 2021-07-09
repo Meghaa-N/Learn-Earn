@@ -88,7 +88,12 @@ if (!isset($_SESSION['admin_id']))
 
         <div class='container'>
           <h2>Students Assigned</h2>
-
+          <div class='card col-lg-4 col-md-6 col'>
+            <h4 class='card-title'>Add a new task for all students</h4>
+            <button class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+              New Task
+            </button>
+          </div>
           <div id='student_list'>
           </div>
         </div>
@@ -96,79 +101,76 @@ if (!isset($_SESSION['admin_id']))
     </section>
 
   </main><!-- End #main -->
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
 
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Scaffold</h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
+  <?php include 'footer.php'; ?>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
-          </div>
-
+  <!-- Modal -->
+  <div class="modal fade" id="newTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newTaskModalLabel">Create a New Task for All students</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form id='newTaskForm'>
+          <div class="modal-body">
+            <section id="portfolio-details" class="portfolio-details">
+              <div class="container">
+
+                <div class="row gy-4">
+
+                  <div class="col-lg-8 " data-aos="zoom-in">
+                    <div>
+                      <div class='form-group mt-3'>
+                        <label>Title of Task</label>
+                        <input class='form-control' type='text' name='Task_title' placeholder='Enter the title' required>
+                      </div>
+                      <div class='form-group mt-3'>
+                        <label>Description</label>
+                        <textarea class='form-control' name='Description' placeholder='Enter the description'></textarea>
+                      </div>
+
+                      <input type='hidden' name='mentor_id' value="<?php echo $_SESSION['admin_id'] ?>">
+                      <div class="question_div mt-3">
+                        <p>Reference material upload (optional)</p>
+                        <input type='file' class='form-control' id='new_task_pdf' name='Task_pdf_file' onchange="uploadFile()" />
+                        <input type='hidden' id='new_task_pdf_name' name='Task_pdf' />
+                        <p class='bg-success text-white' id='upload_response'></p>
+                      </div>
+                      <div class="portfolio-description">
+                        <h2>Comments</h2>
+                        <textarea class='form-control' name='Comment' placeholder='Write your comment.'></textarea>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4" data-aos="fade-left">
+                    <div class="portfolio-info">
+                      <h3>DETAILS</h3>
+                      <ul>
+                        <li><strong>Due</strong>: <input type='datetime-local' class='form-control' name='Due_Timestamp' /></li>
+                        <li><strong>Marks Possible</strong><input type='number' class='form-control' name='Marks_possible' /></li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" name='submit' class="btn btn-primary" value='Save changes' />
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-    <!-- <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Scaffold</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">-->
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/scaffold-bootstrap-metro-style-template/ -->
-    <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div> -->
-  </footer><!-- End Footer -->
   <script>
     function student_list() {
       $.post('api/student_list.php', {
@@ -177,8 +179,42 @@ if (!isset($_SESSION['admin_id']))
         $('#student_list').html(data);
       })
     }
+
+    function uploadFile() {
+      var fd = new FormData();
+      var files = $('#new_task_pdf')[0].files[0];
+
+      fd.append('file', files);
+
+      $.ajax({
+        url: 'api/upload_file.php',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(response) {
+          $('#new_task_pdf_name').val(response);
+          $('#upload_response').html('File uploaded as : ' + response);
+        },
+      });
+    }
+
     $(document).ready(function() {
       student_list();
+
+      $('#newTaskForm').submit(function(event) {
+        event.preventDefault();
+        var formValues = $(this).serialize();
+        $.post("api/add_new_task_for_all.php", formValues, function(data) {
+          alert(data);
+          tasks_assigned();
+          if (data === 'Task Added') {
+            $('#newTaskModal').modal('toggle');
+          }
+        });
+
+      })
     })
   </script>
 
