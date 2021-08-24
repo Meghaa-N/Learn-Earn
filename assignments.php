@@ -8,6 +8,10 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <style>
+.tab
+{
+  padding-left: 2%;
+}
 #q_pdf
 {
   display: block;
@@ -199,24 +203,43 @@ session_start();
           <div class="col-lg-4" data-aos="fade-left">
             <div class="portfolio-info">
               <h3>DETAILS</h3>
-              <ul>
-                <li><strong>Due</strong>: <?php echo $val['Due_Timestamp'] ?></li>
-                <?php if(!is_null($val['Submission_date_timestamp'])){?>
-                  <li><strong>Submitted on</strong>: <?php echo $val['Submission_date_timestamp'] ?></li>
+              
+                <table>
+                  <tr>
+                  <th ><strong>Due</strong>:</th>
+                  <td class="tab" ><?php echo $val['Due_Timestamp'] ?></td>
+                </tr>
+                <tr>
+                 <?php if(!is_null($val['Submission_date_timestamp'])){?>
+                  <td ><strong>Submitted on</strong>:</td><td class="tab"> <?php echo $val['Submission_date_timestamp'] ?></td>
                   <?php } ?>
-                  
+                </tr>
+                <tr>
+
                 <?php if($val['Marks_possible']==0){?>
-                  <li><strong>Marks possible</strong>: No Points</li>
+                  <td ><strong>Marks possible</strong>:</td><td class="tab">No Points</td>
                   <?php }
 
                   else { ?>  
-                <li><strong>Marks possible</strong>: <?php echo $val['Marks_possible'] ?></li>
+                <td ><strong>Marks possible</strong>:</td><td class="tab"> <?php echo $val['Marks_possible'] ?></td>
               <?php } ?>
-              
-              <?php if(!is_null($val['Marks'])){?>
-                  <li><strong>Marks obtained</strong>: <?php echo $val['Marks'] ?></li>
+            </tr>
+            <tr>
+               <?php if(!is_null($val['Marks'])){?>
+                  <td ><strong>Marks obtained</strong>: </td><td class="tab"><?php echo $val['Marks'] ?></td>
                   <?php } ?>
-              </ul>
+
+
+
+                </table>
+
+
+               
+               
+               
+              
+             
+          
             </div>
             <div class="portfolio-description">
               <h2>Comments from your teacher</h2>

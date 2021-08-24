@@ -248,7 +248,7 @@ $_SESSION['student_id']=1;
             <div class="portfolio-wrap">
               <div class="topic_tabs"  >
                 <h3 style="text-align: center; font-size: 18px;"><?php echo $val['Task_Title'] ?></h3>
-                <p style="text-align: center;">Due: <?php echo $val['Due_Timestamp'] ?></p>
+                <p style="text-align: center;">Submitted on: <?php echo $val['Submission_date_timestamp'] ?><span style="margin:2%">Marks possible: <?php echo $val['Marks_possible'] ?></span></p>
               </div>
             </div>
           </div>
@@ -268,7 +268,7 @@ $_SESSION['student_id']=1;
             <div  class="portfolio-wrap">
               <div class="topic_tabs">
                 <h3 style="text-align: center; font-size: 18px;"><?php echo $val['Task_Title'] ?></h3>
-                <p style="text-align: center;">Due: <?php echo $val['Due_Timestamp'] ?></p>
+                <p style="text-align: center;">Submitted on: <?php echo $val['Submission_date_timestamp'] ?><span style="margin:2%">Marks possible: <?php echo $val['Marks_possible'] ?></span>Marks obtained: <?php echo $val['Marks'] ?></p>
               </div>
             </div>
           </div>
