@@ -2,6 +2,9 @@
 session_start();
 include "db_connect.php";
 $_SESSION['student_id']=1;
+if(isset($_SESSION['student_id'])==true)
+{
+
 //echo "<script>window.alert('Hello')</script>";
 ?>
 <!DOCTYPE html>
@@ -140,7 +143,7 @@ $_SESSION['student_id']=1;
 
         <div class="row">
           <div class="col-lg-4" data-aos="zoom-in">
-            <img style="width:250px;height: 250px;"src="<?php echo $val['photo'] ?>" class="img-fluid" alt="">
+            <img style="width:250px;height: 250px;"src="<?php echo $val['photo'] ?>" class="img-fluid" alt="Upload your image">
           </div>
           <div class="col-lg-8 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
@@ -217,10 +220,7 @@ $_SESSION['student_id']=1;
               <?php
                     $sql="SELECT * FROM tasks where Task_Status=1 and Student_id=$_SESSION[student_id]";
                     $result=mysqli_query($conn,$sql);
-                    // if(isset($result))
-                    // {
-                    //   echo "<script>window.alert('Hello !!!')</script>";
-                    // }
+                    
                      while( $val = mysqli_fetch_assoc($result))
                     {
               ?>
@@ -237,10 +237,7 @@ $_SESSION['student_id']=1;
           <?php
                     $sql="SELECT * FROM tasks where Task_Status=2 and Student_id=$_SESSION[student_id]";
                     $result=mysqli_query($conn,$sql);
-                    // if(isset($result))
-                    // {
-                    //   echo "<script>window.alert('Hello !!!')</script>";
-                    // }
+                    
                      while( $val = mysqli_fetch_assoc($result))
                     {
               ?>
@@ -257,10 +254,7 @@ $_SESSION['student_id']=1;
           <?php
                     $sql="SELECT * FROM tasks where Task_Status=3 and Student_id=$_SESSION[student_id]";
                     $result=mysqli_query($conn,$sql);
-                    // if(isset($result))
-                    // {
-                    //   echo "<script>window.alert('Hello !!!')</script>";
-                    // }
+                    
                      while( $val = mysqli_fetch_assoc($result))
                     {
               ?>
@@ -1104,3 +1098,10 @@ $_SESSION['student_id']=1;
 </body>
 
 </html>
+<?php } 
+else
+{
+  echo "<script>window.alert('Please login to continue!')</script>";
+}
+
+?>

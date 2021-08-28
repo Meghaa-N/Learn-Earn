@@ -1,5 +1,7 @@
 <?php
 session_start();
+if(isset($_SESSION['task_id'])==true)
+{
   include "db_connect.php";
   //echo "<script>window.alert($_SESSION[task_id])</script>"
   //$_SESSION['task_id']=1;
@@ -10,7 +12,7 @@ session_start();
 <style>
 .tab
 {
-  padding-left: 2%;
+  padding-left: 0%;
 }
 #q_pdf
 {
@@ -354,3 +356,11 @@ session_start();
 </body>
 
 </html>
+<?php
+  }
+  else
+  {
+    echo "<script>window.alert('Invalid access')</script>";
+    echo "<script>window.location.href='index.php'</script>";
+  }
+?>

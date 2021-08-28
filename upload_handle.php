@@ -40,6 +40,11 @@ if ($uploadOk == 0) {
  else {
     echo "<script>alert('Sorry, there was an error uploading your file.')</script>";
   }
-  echo date("Y-m-d H:i:s");
+  echo "<script>window.history.back()</script>";
 }
+}
+else
+{
+  echo "<script>window.alert('Invalid Access!')</script>";
+  echo "<script>window.history.back()</script>";
 }
